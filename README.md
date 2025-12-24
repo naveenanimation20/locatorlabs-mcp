@@ -6,6 +6,9 @@ An MCP (Model Context Protocol) server that provides smart locator generation fo
 
 **Works directly in VS Code** (with GitHub Copilot), Cursor, Windsurf, Cline, and Claude Desktop. No extra apps needed - just your favorite IDE!
 
+[![npm version](https://img.shields.io/npm/v/locatorlabs-mcp.svg)](https://www.npmjs.com/package/locatorlabs-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/locatorlabs-mcp.svg)](https://www.npmjs.com/package/locatorlabs-mcp)
+
 ### ⚡ Quick Install
 
 **VS Code (v1.99+):**
