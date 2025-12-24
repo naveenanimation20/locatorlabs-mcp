@@ -11,8 +11,8 @@ An MCP (Model Context Protocol) server that provides smart locator generation fo
 
 ### ⚡ Quick Install
 
-<a href="#-quick-install"><img src="https://img.shields.io/badge/Install_in_VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Install in VS Code"></a>
-<a href="#-quick-install"><img src="https://img.shields.io/badge/Install_in_Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white" alt="Install in Cursor"></a>
+<a href="vscode://ms-vscode.mcp/install?name=locatorlabs&command=npx&args=-y,locatorlabs-mcp"><img src="https://img.shields.io/badge/Install_in_VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Install in VS Code"></a>
+<a href="cursor://anysphere.cursor-mcp/install?name=locatorlabs&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22locatorlabs-mcp%22%5D%7D"><img src="https://img.shields.io/badge/Install_in_Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white" alt="Install in Cursor"></a>
 
 **VS Code (v1.99+):**
 ```bash
