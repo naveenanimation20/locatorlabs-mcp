@@ -1,60 +1,90 @@
 # LocatorLabs MCP Server
 
-> Intelligent Playwright locator generation powered by AI
+> 🎯 Intelligent Playwright locator generation powered by AI
 
-An MCP (Model Context Protocol) server that provides smart locator generation for Playwright test automation. Works with Claude Desktop, Cursor, Cline, and other MCP-compatible clients.
+An MCP (Model Context Protocol) server that provides smart locator generation for Playwright test automation. 
 
-## Features
+**Works directly in VS Code** (with GitHub Copilot), Cursor, Windsurf, Cline, and Claude Desktop. No extra apps needed - just your favorite IDE!
 
-- 🎯 **Get All Locators** - Generate every possible locator for an element with reliability rankings
-- 📊 **Page Analysis** - Scan entire pages and identify all interactive elements
-- 🏗️ **Page Object Generator** - Auto-generate POM classes in TypeScript, JavaScript, or Python
-- ✅ **Locator Validation** - Verify locators are unique and stable
+[![npm version](https://badge.fury.io/js/locatorlabs-mcp.svg)](https://www.npmjs.com/package/locatorlabs-mcp)
 
-## Installation
+### ⚡ One-Click Install
 
+[<img src="https://img.shields.io/badge/Install_in_VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Install in VS Code">](https://insiders.vscode.dev/redirect?url=vscode://ms-vscode.mcp/install?name=locatorlabs%26command=npx%26args=-y,locatorlabs-mcp)
+
+[<img src="https://img.shields.io/badge/Install_in_Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white" alt="Install in Cursor">](cursor://anysphere.cursor-mcp/install?name=locatorlabs&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22locatorlabs-mcp%22%5D%7D)
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🎯 **Get Locators** | Get all possible locators for any element with reliability rankings |
+| 📊 **Analyze Page** | Scan pages and identify all interactive elements |
+| 🏗️ **Generate POM** | Auto-generate Page Object classes (TypeScript/JavaScript/Python) |
+| ✅ **Run Tests** | Execute Playwright tests and get pass/fail results |
+| 📝 **Generate Tests** | Create executable test scripts |
+
+## 🚀 Quick Start
+
+### For VS Code (v1.99+ with GitHub Copilot)
+
+**One-Line Install (Mac/Linux):**
 ```bash
-npm install -g @naveenautomationlabs/locatorlabs-mcp
+code --add-mcp '{"name":"locatorlabs","command":"npx","args":["-y","locatorlabs-mcp"]}'
 ```
 
-## Setup
+**One-Line Install (Windows PowerShell):**
+```powershell
+code --add-mcp '{\"name\":\"locatorlabs\",\"command\":\"npx\",\"args\":[\"-y\",\"locatorlabs-mcp\"]}'
+```
 
-### Claude Desktop
+**Or Manual Setup:**
+1. Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
+2. Type: `MCP: Add Server`
+3. Select: `Command (stdio)`
+4. Command: `npx`
+5. Args: `-y locatorlabs-mcp`
 
-Add to your Claude Desktop config:
+**Using with GitHub Copilot:**
+1. Enable Agent Mode: Settings → Search `chat.agent.enabled` → Enable
+2. Open Copilot Chat (`Ctrl+Cmd+I` / `Ctrl+Alt+I`)
+3. Switch to **Agent** mode (dropdown at top)
+4. Chat: "Get locators for login button on https://saucedemo.com"
 
-**Mac:** `~/Library/Application Support/Claude/claude_desktop_config.json`  
-**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+### For Claude Desktop
+
+**Step 1:** Open config file
+
+- **Mac:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+**Step 2:** Add this configuration:
 
 ```json
 {
   "mcpServers": {
     "locatorlabs": {
       "command": "npx",
-      "args": ["-y", "@naveenautomationlabs/locatorlabs-mcp"]
+      "args": ["-y", "locatorlabs-mcp"]
     }
   }
 }
 ```
 
-Restart Claude Desktop after adding the configuration.
+**Step 3:** Restart Claude Desktop
 
-### Cursor IDE
+### For Cursor IDE
 
-Add to `.cursor/mcp.json` in your project:
-
-```json
-{
-  "mcpServers": {
-    "locatorlabs": {
-      "command": "npx",
-      "args": ["-y", "@naveenautomationlabs/locatorlabs-mcp"]
-    }
-  }
-}
+**One-Line Install:**
+```bash
+cursor --add-mcp '{"name":"locatorlabs","command":"npx","args":["-y","locatorlabs-mcp"]}'
 ```
 
-### VS Code + Cline
+**Or Manual:** Go to Cursor Settings → MCP → Add new MCP Server
+- Name: `locatorlabs`
+- Command: `npx -y locatorlabs-mcp`
+
+### For VS Code + Cline Extension
 
 Add to Cline MCP settings:
 
@@ -63,124 +93,162 @@ Add to Cline MCP settings:
   "mcpServers": {
     "locatorlabs": {
       "command": "npx",
-      "args": ["-y", "@naveenautomationlabs/locatorlabs-mcp"]
+      "args": ["-y", "locatorlabs-mcp"]
     }
   }
 }
 ```
 
-## Usage Examples
+## 📖 Usage Examples
 
-Once configured, just chat naturally with Claude:
+Just chat naturally:
 
 ### Get Locators for an Element
 
-> "Get me all locators for the login button on https://example.com/login"
+> "Get me all locators for the login button on https://www.saucedemo.com"
 
-Claude will return:
+**Response:**
 
 | Type | Locator | Reliability |
 |------|---------|-------------|
-| testId | `getByTestId('login-btn')` | ⭐⭐⭐⭐⭐ |
-| role | `getByRole('button', { name: 'Login' })` | ⭐⭐⭐⭐⭐ |
-| text | `getByText('Login')` | ⭐⭐⭐⭐ |
-| css | `locator('.btn-primary')` | ⭐⭐⭐ |
+| testId | `getByTestId('login-button')` | 98% |
+| role | `getByRole('button', { name: 'Login' })` | 95% |
+| id | `locator('#login-button')` | 90% |
 
 ### Analyze Entire Page
 
-> "Analyze all form elements on https://example.com/register"
+> "Analyze all form elements on https://www.saucedemo.com"
 
 ### Generate Page Object Model
 
-> "Generate a TypeScript Page Object for the login page at https://example.com/login, call it LoginPage"
+> "Generate a TypeScript Page Object for https://www.saucedemo.com and call it LoginPage"
 
-### Validate a Locator
+### Run a Test
 
-> "Check if getByRole('button', { name: 'Submit' }) is unique on https://example.com/form"
+> "Run a test that logs into saucedemo.com with standard_user and secret_sauce, then verify Products page appears"
 
-## Available Tools
+**Response:**
+```
+✅ Test PASSED (3.2s)
+- Navigate to login page ✅
+- Enter username ✅
+- Enter password ✅
+- Click login ✅
+- Verify Products visible ✅
+```
+
+### Generate Test Script
+
+> "Generate a Python test script for the saucedemo login flow"
+
+## 🛠️ Available Tools
 
 | Tool | Description |
 |------|-------------|
 | `get_locators` | Get all possible locators for a specific element |
 | `analyze_page` | List all interactive elements on a page |
-| `generate_page_object` | Create POM class (TS/JS/Python) |
-| `validate_locator` | Check if locator is unique and valid |
-| `run_test` | **Execute a Playwright test and return pass/fail** |
-| `generate_test` | **Generate executable test script** |
+| `generate_page_object` | Create POM class (TypeScript/JavaScript/Python) |
+| `run_test` | Execute tests in real browser, get pass/fail |
+| `generate_test` | Generate executable test scripts |
 
-## 🚀 Test Execution (Killer Feature!)
+## 🎯 Supported Test Actions
 
-LocatorLabs can actually RUN your tests, not just generate code!
+| Action | Description |
+|--------|-------------|
+| `navigate` | Go to URL |
+| `click` | Click element |
+| `fill` | Enter text |
+| `clear` | Clear input field |
+| `check` / `uncheck` | Toggle checkbox |
+| `select` | Select dropdown option |
+| `hover` | Mouse hover |
+| `press` | Keyboard key press |
+| `assert_visible` | Verify element visible |
+| `assert_hidden` | Verify element hidden |
+| `assert_text` | Verify text content |
+| `assert_value` | Verify input value |
+| `assert_url` | Verify page URL |
+| `assert_title` | Verify page title |
+| `wait` | Wait for time |
+| `wait_for_element` | Wait for element |
+| `screenshot` | Capture screenshot |
 
-### Example: Run a Login Test
-
-Ask Claude:
-
-> "Run a test that logs into saucedemo.com with user 'standard_user' and password 'secret_sauce', then verify the inventory page loads"
-
-Claude will:
-1. Generate test steps
-2. Execute them in a real browser
-3. Return: ✅ PASSED or ❌ FAILED with details
-
-### Example Response:
-
-```json
-{
-  "testName": "Login Test",
-  "status": "passed",
-  "duration": 3420,
-  "steps": [
-    { "step": "Navigate to login page", "status": "passed", "duration": 1200 },
-    { "step": "Enter username", "status": "passed", "duration": 150 },
-    { "step": "Enter password", "status": "passed", "duration": 120 },
-    { "step": "Click login button", "status": "passed", "duration": 180 },
-    { "step": "Verify inventory page visible", "status": "passed", "duration": 1770 }
-  ]
-}
-```
-
-## Locator Priority
+## 🏆 Locator Priority
 
 LocatorLabs ranks locators by reliability:
 
 1. **data-testid** (98%) - Best, explicitly for testing
 2. **Role + Name** (95%) - Playwright recommended
-3. **ID** (90%) - Stable if meaningful
-4. **Label/Placeholder** (85%) - Good for forms
-5. **Text** (75%) - May change
-6. **CSS** (60%) - Can be brittle
-7. **XPath** (40%) - Avoid unless necessary
+3. **Label** (90%) - Accessible
+4. **ID** (90%) - Stable if meaningful
+5. **Placeholder** (85%) - Good for inputs
+6. **Text** (75%) - May change
+7. **CSS** (60%) - Can be brittle
+8. **XPath** (40%) - Avoid unless necessary
 
-## Requirements
+## 🔄 LocatorLabs vs Playwright MCP
+
+| Feature | Playwright MCP | LocatorLabs MCP |
+|---------|----------------|-----------------|
+| Get all locators for element | ❌ | ✅ |
+| Locator reliability ranking | ❌ | ✅ |
+| Generate Page Object Model | ❌ | ✅ |
+| Run tests with pass/fail | ❌ | ✅ |
+| Browser automation | ✅ | ✅ |
+| Device emulation | ✅ | ❌ |
+
+**They work great together!** Use Playwright MCP for navigation/scraping, LocatorLabs MCP for locators/POMs/tests.
+
+## 📋 Requirements
 
 - Node.js 18+
-- Playwright browsers (auto-installed)
+- Playwright browsers (auto-installed on first run)
 
-## Development
+## 🔧 Troubleshooting
+
+### Playwright browsers not installed
 
 ```bash
-# Clone repo
-git clone https://github.com/naveenautomationlabs/locatorlabs-mcp.git
-cd locatorlabs-mcp
-
-# Install dependencies
-npm install
-
-# Build
-npm run build
-
-# Run locally
-npm start
+npx playwright install chromium
 ```
 
-## Author
+### Permission issues on Mac
+
+```bash
+chmod +x ~/.npm/_npx/*/node_modules/.bin/locatorlabs-mcp
+```
+
+### View logs (Claude Desktop)
+
+```bash
+tail -f ~/Library/Logs/Claude/mcp*.log
+```
+
+### Auto-approve tools in VS Code
+
+Add to `settings.json`:
+```json
+{
+  "chat.tools.autoApprove": true
+}
+```
+
+## 🤝 Contributing
+
+Contributions welcome! Please open an issue or PR on GitHub.
+
+## 📺 Author
 
 **Naveen AutomationLabs**
-- YouTube: [Naveen AutomationLabs](https://youtube.com/@naboratory)
-- Website: [naveenautomationlabs.com](https://naveenautomationlabs.com)
 
-## License
+- YouTube: [@naveenautomationlabs](https://www.youtube.com/@naveenautomationlabs/) (415K+ subscribers)
+- Website: [naveenautomationlabs.com](https://naveenautomationlabs.com)
+- LinkedIn: [Naveen AutomationLabs](https://linkedin.com/in/naveenkhunteta)
+
+## 📄 License
 
 MIT
+
+---
+
+Made with ❤️ for the test automation community
